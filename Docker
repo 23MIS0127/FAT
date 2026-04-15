@@ -1,4 +1,5 @@
 git clone link
+cd repo name
 code .
 window
 
@@ -8,3 +9,126 @@ git commit -m " "
 git branch feature-resume
 git checkout feature-resume
 git push -u origin fearure-resume
+i can able to see in git
+
+now creating a docker file
+go to add file,create a file,name it then dont forgrt to cxhange the file name acc
+Dockerfile
+FROM nginx:latest
+COPY resume.html /usr/share/nginx/html/resume.html
+EXPOSE 80
+
+commit changes
+dockerfile will be created
+
+create deployment file
+deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-demo
+  labels:
+    app: html-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: html-demo  # This MUST match the template label below
+  template:
+    metadata:
+      labels:
+        app: html-demo # This is the label applied to the Pods
+    spec:
+      containers:
+      - name: html-demo-container
+        image: 23mis0127/html-demo # Use the image you just pushed
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-demo-service
+spec:
+  selector:
+    app: html-demo
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+
+commit changes
+
+open docker desktop
+go to setting>kubernetes>enable kub
+running,apply,close
+go to docker acc>acc settings>login>in settings >personal access tokens
+generate new token
+read write del in access permission,generate
+
+
+copy the run and open cmd paste the link
+it will ask password then copy paste the 2nd link
+SUCCESSFUL
+
+open jenkins
+
+setting>credentials>add credentials>Username with password
+in username-23mis0127
+password-personal access token link
+ID-dockerhub
+Desc-blah
+create
+
+Add credentials
+craete Secrete file
+in choose file go to windows(c)>users>batch1>.kube>config
+ID-kuberconfig
+create
+
+create new item>pipeline
+paste pipeline script
+pipeline {
+agent any
+environment {
+DOCKER_IMAGE = "23mis0127/html-demo"
+}
+stages {
+ stage('Clone Code') {
+steps {
+git branch: 'main',
+url: 'https://github.com/swetab-max/docker-example.git'
+}
+}
+stage('Build Docker Image') {
+steps {
+bat 'docker build -t %DOCKER_IMAGE% .'
+}
+}
+stage('Push Image') {
+steps {
+withCredentials([usernamePassword(credentialsId: 'dockerhub',
+usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+bat 'docker login -u %USER% -p %PASS%'
+bat 'docker push %DOCKER_IMAGE%'
+}
+}
+}
+stage('Deploy to Kubernetes') {
+steps {
+withCredentials([file(credentialsId: 'kuberconfig', variable:
+'KUBECONFIG')]) {
+bat '''
+set KUBECONFIG=%KUBECONFIG%
+kubectl apply -f deployment.yaml --validate=false
+'''
+}
+}
+}
+}
+}
+apply,save
+build now
+
