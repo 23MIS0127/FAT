@@ -1,26 +1,28 @@
 package com.example;
 
-import java.util.Scanner;
+public class App {
 
-public class AttendanceCalculator {
+    public static double calculateAttendance(int attended, int total) {
+        return ((double) attended / total) * 100;
+    }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        double result = calculateAttendance(75, 100);
+        System.out.println("Attendance: " + result + "%");
+    }
+}
 
-        System.out.print("Enter total classes: ");
-        int total = sc.nextInt();
 
-        System.out.print("Enter attended classes: ");
-        int attended = sc.nextInt();
+package com.example;
 
-        double percentage = ((double) attended / total) * 100;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-        System.out.println("Attendance Percentage: " + percentage + "%");
+public class AppTest {
 
-        if (percentage >= 75) {
-            System.out.println("Eligible for exam");
-        } else {
-            System.out.println("Not eligible for exam");
-        }
+    @Test
+    public void testAttendance() {
+        assertEquals(75.0, App.calculateAttendance(75, 100), 0.01);
+        assertEquals(50.0, App.calculateAttendance(25, 50), 0.01);
     }
 }
