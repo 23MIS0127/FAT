@@ -1,7 +1,5 @@
 package com.example;
 
-import java.util.Scanner;
-
 class Student {
     int id;
     String name;
@@ -13,29 +11,29 @@ class Student {
         this.course = course;
     }
 
-    void display() {
-        System.out.println("\n--- Registration Details ---");
-        System.out.println("Student ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Course: " + course);
+    public String getCourse() {
+        return course;
     }
 }
 
-public class CourseRegistration {
+public class App {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Student s = new Student(1, "Vaishnavi", "DevOps");
+        System.out.println("Course: " + s.getCourse());
+    }
+}
 
-        System.out.print("Enter Student ID: ");
-        int id = sc.nextInt();
-        sc.nextLine();
 
-        System.out.print("Enter Name: ");
-        String name = sc.nextLine();
+package com.example;
 
-        System.out.print("Enter Course Name: ");
-        String course = sc.nextLine();
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-        Student s = new Student(id, name, course);
-        s.display();
+public class AppTest {
+
+    @Test
+    public void testCourseRegistration() {
+        Student s = new Student(1, "Test", "DevOps");
+        assertEquals("DevOps", s.getCourse());
     }
 }
