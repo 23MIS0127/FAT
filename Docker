@@ -1,0 +1,10 @@
+git clone link
+code .
+window
+
+open terminal
+git add .
+git commit -m " "
+git branch feature-resume
+git checkout feature-resume
+git push -u origin fearure-resume
