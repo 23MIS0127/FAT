@@ -1,0 +1,163 @@
+STUDENT GRADE CHECKER
+App.java
+package com.example;
+
+public class App {
+
+    public String getGrade(int marks) {
+        if (marks >= 90) return "A";
+        else if (marks >= 75) return "B";
+        else if (marks >= 50) return "C";
+        else return "Fail";
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        System.out.println(app.getGrade(85));
+    }
+}
+
+AppTest.java
+package com.example;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AppTest {
+
+    @Test
+    public void testGradeA() {
+        App app = new App();
+        assertEquals("A", app.getGrade(95));
+    }
+
+    @Test
+    public void testFail() {
+        App app = new App();
+        assertEquals("Fail", app.getGrade(30));
+    }
+}
+------------------------------------------------------------
+ATTENDANCE CHECKER
+App.java
+package com.example;
+
+public class App {
+
+    public String checkAttendance(int attended, int total) {
+        double percentage = (attended * 100.0) / total;
+
+        if (percentage >= 75) return "Eligible";
+        else return "Not Eligible";
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        System.out.println(app.checkAttendance(60, 80));
+    }
+}
+
+AppTest.java
+package com.example;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AppTest {
+
+    @Test
+    public void testEligible() {
+        App app = new App();
+        assertEquals("Eligible", app.checkAttendance(60, 80));
+    }
+
+    @Test
+    public void testNotEligible() {
+        App app = new App();
+        assertEquals("Not Eligible", app.checkAttendance(40, 80));
+    }
+}
+----------------------------------------------------------
+
+PAYROLL CHECKER
+App.java
+package com.example;
+
+public class App {
+
+    public double calculateSalary(double basic) {
+        double hra = 0.2 * basic;
+        double da = 0.1 * basic;
+        return basic + hra + da;
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        System.out.println(app.calculateSalary(10000));
+    }
+}
+
+AppTest.java
+package com.example;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AppTest {
+
+    @Test
+    public void testSalary() {
+        App app = new App();
+        assertEquals(13000, app.calculateSalary(10000), 0.01);
+    }
+}
+---------------------------------------------------------------
+SIMPLE CALCULATOR
+App.java
+package com.example;
+
+public class App {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int divide(int a, int b) {
+        if (b == 0) throw new ArithmeticException("Divide by zero");
+        return a / b;
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        System.out.println(app.add(5, 3));
+    }
+}
+
+AppTest.java
+package com.example;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class AppTest {
+
+    @Test
+    public void testAdd() {
+        App app = new App();
+        assertEquals(8, app.add(5, 3));
+    }
+
+    @Test
+    public void testDivide() {
+        App app = new App();
+        assertEquals(2, app.divide(6, 3));
+    }
+}
