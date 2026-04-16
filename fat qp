@@ -1,0 +1,16 @@
+Design and develop a University Department Web Page using HTML that provides essential
+information about a specific department (e.g., Computer Science, Mechanical Engineering).
+The webpage should include a header section with the university name and its detailed
+description and administrative heads. The main content should contain an About section
+describing the department, along with details of courses offered, including course names and
+brief descriptions. It can also include a Faculty section (optional) listing faculty member with
+their names, designations, and areas of expertise (basic text is sufficient). Additionally, the
+page should include a Contact section with details such as address, phone number, and email.
+A footer section should be added with copyright information. Maintain the source code in a
+GitHub repository [10].
+• Clone the repository into VS Code, make any updates, commit and push the changes
+to the Git repository [10].
+• Containerize the application using Docker and prepare it for deployment [10].
+• Configure Jenkins to create a pipeline project that builds, tests, and deploys the
+application using Docker and Kubernetes, and visualize the deployment through
+Docker Desktop [20]
