@@ -63,3 +63,19 @@ pipeline {
 }
 apply,save
 build now
+
+-----------------------------------------------------------------------------------
+To view the same tests in VS Terminal
+Open the repo in vs code:
+
+git clone <repo link>
+code .
+new window will open.
+(if u can see the structure, then fine. else put the below)
+In VS Terminal:
+git pull origin main --allow-unrelated-histories 
+Project structure will be visible on the left panel.
+And then in VS Terminal:
+syntax: mvn clean test
+
+Ull get build successful.
